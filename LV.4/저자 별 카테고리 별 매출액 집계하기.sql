@@ -1,0 +1,14 @@
+-- 2022년 1월 도서
+-- 저자별, 카테고리별 매출액 
+-- TOTAL_SALES = 판매량 * 판매가
+-- ※ 저자별, 카테고리별 총 매출액을 확인하는 식이기 때문에 'SUM'을 붙여야함
+-- 그냥 출력 시, 각 카테고리별 1열에 위치한 판매량*판매가 가 출력된다
+
+SELECT A.AUTHOR_ID, AUTHOR_NAME, CATEGORY, SUM(SALES*PRICE) TOTAL_SALES
+FROM AUTHOR A JOIN BOOK B 
+ON A.AUTHOR_ID = B.AUTHOR_ID
+LEFT JOIN BOOK_SALES BS 
+ON B.BOOK_ID = BS.BOOK_ID
+WHERE SALES_DATE LIKE '2022-01%'
+GROUP BY B.AUTHOR_ID, CATEGORY
+ORDER BY 1, 3 DESC;
