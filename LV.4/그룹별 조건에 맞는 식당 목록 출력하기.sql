@@ -1,0 +1,12 @@
+-- 리뷰 가장 많이 작성한 회원의 리뷰들을 조회
+
+SELECT MP.MEMBER_NAME, RR.REVIEW_TEXT, 
+       DATE_FORMAT(RR.REVIEW_DATE,'%Y-%m-%d') REVIEW_DATE 
+FROM MEMBER_PROFILE MP INNER JOIN REST_REVIEW RR 
+ON MP.MEMBER_ID = RR.MEMBER_ID
+WHERE MP.MEMBER_ID = (SELECT MEMBER_ID
+                      FROM REST_REVIEW
+                      GROUP BY MEMBER_ID
+                      ORDER BY COUNT(*) DESC
+                      LIMIT 1)
+ORDER BY 3, 2
