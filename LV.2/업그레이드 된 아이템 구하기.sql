@@ -1,0 +1,8 @@
+-- 희귀도 'RARITY'인 아이템의 모든 다음 업그레이드 아이템
+SELECT I.ITEM_ID, ITEM_NAME, RARITY
+FROM ITEM_INFO I JOIN ITEM_TREE T
+ON I.ITEM_ID = T.ITEM_ID
+WHERE PARENT_ITEM_ID IN (SELECT ITEM_ID 
+                         FROM ITEM_INFO 
+                         WHERE RARITY = 'RARE') # PARENT_ITEM_ID도 RARITY가 동일해야 업그레이드 가능
+ORDER BY I.ITEM_ID DESC;
