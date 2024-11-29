@@ -1,0 +1,8 @@
+SELECT COUNT(ID) AS FISH_COUNT, NI.FISH_NAME
+FROM FISH_INFO I INNER JOIN FISH_NAME_INFO NI
+ON I.FISH_TYPE = NI.FISH_TYPE
+GROUP BY NI.FISH_NAME
+ORDER BY FISH_COUNT DESC;
+
+-- 문제에서는 종류별로 잡은 수와 이름을 출력하라고 해서 처음에 GROUP BY FISH_TYPE으로 실행해서 오류
+-- SQL 쿼리에서 GROUP BY 절에 명시된 컬럼이 SELECT 절에서 직접적으로 사용되는 모든 컬럼과 일치해야 하기 때문에 GROUP BY FISH_NAME으로 실행
